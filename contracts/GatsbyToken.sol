@@ -1,14 +1,19 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.5.0;
 
-import "openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
-contract GatsbyToken is StandardToken {
-    string public name = "Gatsby";
-    string public symbol = "GATS";
-    uint8 public decimals = 18;
-    uint public INITIAL_SUPPLY = 1000;
+contract GatsbyToken is ERC20 {
 
-    function GatsbyToken() public {
-        balances[msg.sender] = INITIAL_SUPPLY;
-    }
+  string public constant name = "Gatsby";
+  string public constant symbol = "GATS";
+  uint8 public constant decimals = 18;
+
+  uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(decimals));
+
+  /**
+   * @dev Constructor that gives msg.sender all of existing tokens.
+   */
+  constructor() public {
+    _mint(msg.sender, INITIAL_SUPPLY);
+  }
 }
