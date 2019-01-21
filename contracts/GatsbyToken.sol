@@ -1,19 +1,16 @@
 pragma solidity ^0.5.0;
 
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
 
-contract GatsbyToken is ERC20 {
+contract GatsbyToken is ERC20, ERC20Detailed {
+    uint8 public constant DECIMALS = 18;
+    uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(DECIMALS));
 
-  string public constant name = "Gatsby";
-  string public constant symbol = "GATS";
-  uint8 public constant decimals = 18;
-
-  uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(decimals));
-
-  /**
-   * @dev Constructor that gives msg.sender all of existing tokens.
-   */
-  constructor() public {
-    _mint(msg.sender, INITIAL_SUPPLY);
-  }
+    /**
+     * @dev Constructor that gives msg.sender all of existing tokens.
+     */
+    constructor () public ERC20Detailed("GatsbyToken", "GATS", DECIMALS) {
+        _mint(msg.sender, INITIAL_SUPPLY);
+    }
 }
